@@ -10,7 +10,7 @@
       justify-content: center;
       align-items: center;
       letter-spacing: 1px;
-      background-color: #0c1022;
+      background-color: #FFFFFF;
   }
   .login_form_container{
       position: relative;
@@ -45,6 +45,7 @@
       background-image: conic-gradient(transparent, transparent, transparent, #00ccff);
       animation: rotate_border 6s linear infinite;
       animation-delay: -3s;
+      
   }
   @keyframes rotate_border{
       0%{
@@ -57,12 +58,12 @@
   .login_form{
       position: absolute;
       content: '';
-      background-color: #0c1022;
+      background-color: #FF0000;
       border-radius: 50px 5px;
       inset: 5px;
       padding: 50px 40px;
       z-index: 10;
-      color: #00ccff;
+      color: #0000FF;
   
   } 
   h2{
@@ -83,15 +84,15 @@
       background: transparent;
       border: none;
       outline: none;
-      border-bottom: 1px solid #00ccff;
+      border-bottom: 1px solid #000000;
       font-size: 20px;
       padding-left: 10px;
-      color: #00ccff;
+      color: #FFFFFF;
   
   }
   ::placeholder{
       font-size: 15px;
-      color: #00ccff52;
+      color: #FFFFFF;
       letter-spacing: 1px;
   
   }
@@ -133,10 +134,10 @@
   .fotter a{
       text-decoration: none;
       cursor: pointer;
-      font-size: 18px;
+      font-size: 14px;
   }
   .glowIcon {
-      text-shadow: 0 0 10px #00ccff;
+      text-shadow: 0 0 10px #ff00c;
   
   }
   
