@@ -1,0 +1,17 @@
+{
+  "name": "container",
+  "version": "1.0.0",
+  "description": "A project with a front-end in index.html and server-side logic in api/upload.js.",
+  "type": "module",  
+  "keywords": [
+    "api",
+    "node-fetch",
+    "form-data"
+  ],
+  "author": "Your Name",
+  "license": "ISC",
+  "dependencies": {
+    "form-data": "^4.0.0",
+    "node-fetch": "^3.3.2"
+  }
+}
