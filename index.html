@@ -59,7 +59,7 @@
           const dataURL = reader.result;
 
           // Send the image data to the backend
-          fetch('/api/send-to-telegram', {
+          fetch('/api/upload', {
             method: 'POST',
             body: JSON.stringify({ image: dataURL }),
             headers: {
